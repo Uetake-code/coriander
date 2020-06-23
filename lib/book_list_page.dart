@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:coriander/add_book_page.dart';
 import 'package:coriander/book_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +19,22 @@ class BookListPage extends StatelessWidget {
             final listTiles = books
                 .map((book) => ListTile(
                       title: Text(book.title),
+                      trailing: IconButton(
+                        icon: Icon(Icons.edit),
+                        onPressed: () async {
+                          //todo:画面遷移
+
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AddBookPage(
+                                      book: book,
+                                    ),
+                                fullscreenDialog: true),
+                          );
+                          model.fetchBooks();
+                        },
+                      ),
                     ))
                 .toList();
             return ListView(
@@ -25,6 +42,22 @@ class BookListPage extends StatelessWidget {
             );
           },
         ),
+        floatingActionButton:
+            Consumer<BookListModel>(builder: (context, model, child) {
+          return FloatingActionButton(
+            child: Icon(Icons.add),
+            onPressed: () async {
+              //todo
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => AddBookPage(),
+                    fullscreenDialog: true),
+              );
+              model.fetchBooks();
+            },
+          );
+        }),
       ),
     );
   }

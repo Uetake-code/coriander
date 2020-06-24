@@ -6,7 +6,9 @@ import 'add_book_model.dart';
 
 class AddBookPage extends StatelessWidget {
   AddBookPage({this.book});
+
   final Book book;
+
   @override
   Widget build(BuildContext context) {
     final bool isUpdate = book != null;
@@ -57,7 +59,6 @@ class AddBookPage extends StatelessWidget {
   Future addBook(AddBookModel model, BuildContext context) async {
     try {
       await model.addBookToFirebase();
-
       await showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -102,7 +103,7 @@ class AddBookPage extends StatelessWidget {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('更新しました！'),
+            title: Text(' 更新しました！'),
             actions: <Widget>[
               FlatButton(
                 child: Text('OK'),

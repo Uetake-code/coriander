@@ -9,6 +9,7 @@ class AddBookModel extends ChangeNotifier {
     if (bookTitle.isEmpty) {
       throw ('タイトルを入力してください');
     }
+
     Firestore.instance.collection('books').add(
       {
         'title': bookTitle,
@@ -18,10 +19,10 @@ class AddBookModel extends ChangeNotifier {
   }
 
   // ignore: missing_return
-  Future updateBook(Book book) {
+  Future updateBook(Book book) async {
     final document =
         Firestore.instance.collection('books').document(book.documentID);
-    document.updateData(
+    await document.updateData(
       {
         'title': bookTitle,
         'createdAt': Timestamp.now(),

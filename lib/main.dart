@@ -1,7 +1,10 @@
 import 'package:coriander/book_list_page.dart';
 import 'package:coriander/main_model.dart';
+import 'package:coriander/signup/signup_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'login_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -17,31 +20,41 @@ class MyApp extends StatelessWidget {
             title: Text('コリアンダー'),
           ),
           body: Consumer<MainModel>(builder: (context, model, child) {
-                return Center(
-                  child: Column(
-                    children: [
-                      Text(
-                        model.kboyText,
-                        style: TextStyle(
-                          fontSize: 30,
-                        ),
-                      ),
-                      RaisedButton(
-                        child: Text('ボタン'),
-                        onPressed: () {
-                          //ここで何
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => BookListPage()),
-                          );
-                        },
-                      ),
-                    ],
+            return Center(
+              child: Column(
+                children: [
+                  Text(
+                    model.kboyText,
+                    style: TextStyle(
+                      fontSize: 30,
+                    ),
                   ),
-                );
-              }),
-             ),
-           ),
-         );
-       }
+                  RaisedButton(
+                    child: Text('新規登録'),
+                    onPressed: () {
+                      //ここで何
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SignUpPage()),
+                      );
+                    },
+                  ),
+                  RaisedButton(
+                    child: Text('ログイン'),
+                    onPressed: () {
+                      //ここで何
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            );
+          }),
+        ),
+      ),
+    );
+  }
 }
